@@ -19,6 +19,22 @@ axs[1, 0].set_title("longitude")
 axs[1, 1].hist(vdf["victim_age"], bins=30, density=True)
 axs[1, 1].set_title("ictim age")
 
+plt.show()
+data = vdf["hour_float"].to_numpy()
+
+mu = np.mean(data)
+sigma = np.std(data)
+x = np.linspace(data.min(), data.max(), 200)
+pdf = (1 / (sigma * np.sqrt(2 * np.pi))) * \
+      np.exp(-(x - mu)**2 / (2 * sigma**2))
+
+plt.hist(data, bins=100, density=True)
+plt.plot(x, pdf)
+plt.title("Gaussian fit: N(μ, σ²)")
+plt.xlabel("Score")
+plt.ylabel("Density")
+plt.show()
+
 plt.tight_layout()
 
-plt.show()
+
